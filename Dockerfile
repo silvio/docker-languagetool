@@ -15,5 +15,5 @@ RUN unzip LanguageTool-2.9.zip
 
 WORKDIR /LanguageTool-2.9
 
-CMD ["java", "-cp", "languagetool-server.jar", "org.languagetool.server.HTTPServer", "--port", "8010" ]
+CMD ["java", "-cp", "languagetool-server.jar", "org.languagetool.server.HTTPServer", "--port", "8010", "--public" ]
 EXPOSE 8010
