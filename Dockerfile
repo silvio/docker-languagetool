@@ -4,7 +4,7 @@ MAINTAINER Silvio Fricke <silvio.fricke@gmail.com>
 
 RUN export DEBIAN_FRONTEND=noninteractive \
     && apt-get update -y \
-    && apt-get install -y openjdk-7-jre git-core unzip \
+    && apt-get install -y openjdk-7-jre-headless unzip \
     && apt-get clean -y
 
 ADD https://www.languagetool.org/download/LanguageTool-2.9.zip /LanguageTool-2.9.zip
