@@ -2,8 +2,6 @@ FROM debian:jessie
 
 MAINTAINER Silvio Fricke <silvio.fricke@gmail.com>
 
-RUN dpkg-divert --local --rename --add /sbin/initctl && ln -sf /bin/true /sbin/initctl
-
 RUN export DEBIAN_FRONTEND=noninteractive \
     && apt-get update -y \
     && apt-get install -y openjdk-7-jre git-core unzip \
