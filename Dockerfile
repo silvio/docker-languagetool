@@ -7,11 +7,11 @@ RUN export DEBIAN_FRONTEND=noninteractive \
     && apt-get install -y openjdk-7-jre-headless unzip \
     && apt-get clean -y
 
-ADD https://www.languagetool.org/download/LanguageTool-2.9.zip /LanguageTool-2.9.zip
+ADD https://www.languagetool.org/download/LanguageTool-3.0.zip /LanguageTool-3.0.zip
 
-RUN unzip LanguageTool-2.9.zip
+RUN unzip LanguageTool-3.0.zip
 
-WORKDIR /LanguageTool-2.9
+WORKDIR /LanguageTool-3.0
 
 CMD ["java", "-cp", "languagetool-server.jar", "org.languagetool.server.HTTPServer", "--port", "8010", "--public" ]
 EXPOSE 8010
