@@ -7,7 +7,8 @@ RUN export DEBIAN_FRONTEND=noninteractive \
     && apt-get install -y --no-install-recommends \
 	openjdk-7-jre-headless \
 	unzip \
-    && apt-get clean -y
+    && apt-get clean -y \
+    && rm -rf /var/lib/apt/lists/*
 
 ADD https://www.languagetool.org/download/LanguageTool-3.0.zip /LanguageTool-3.0.zip
 
