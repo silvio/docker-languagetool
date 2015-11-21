@@ -10,11 +10,12 @@ RUN export DEBIAN_FRONTEND=noninteractive \
     && apt-get clean -y \
     && rm -rf /var/lib/apt/lists/*
 
-ADD https://www.languagetool.org/download/LanguageTool-3.0.zip /LanguageTool-3.0.zip
+ENV VERSION 3.1
+ADD https://www.languagetool.org/download/LanguageTool-$VERSION.zip /LanguageTool-$VERSION.zip
 
-RUN unzip LanguageTool-3.0.zip
+RUN unzip LanguageTool-$VERSION.zip
 
-WORKDIR /LanguageTool-3.0
+WORKDIR /LanguageTool-$VERSION
 
 CMD ["java", "-cp", "languagetool-server.jar", "org.languagetool.server.HTTPServer", "--port", "8010", "--public" ]
 EXPOSE 8010
