@@ -4,7 +4,9 @@ MAINTAINER Silvio Fricke <silvio.fricke@gmail.com>
 
 RUN export DEBIAN_FRONTEND=noninteractive \
     && apt-get update -y \
-    && apt-get install -y openjdk-7-jre-headless unzip \
+    && apt-get install -y \
+	openjdk-7-jre-headless \
+	unzip \
     && apt-get clean -y
 
 ADD https://www.languagetool.org/download/LanguageTool-3.0.zip /LanguageTool-3.0.zip
