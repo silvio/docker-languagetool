@@ -4,7 +4,7 @@ MAINTAINER Silvio Fricke <silvio.fricke@gmail.com>
 
 RUN export DEBIAN_FRONTEND=noninteractive \
     && apt-get update -y \
-    && apt-get install -y \
+    && apt-get install -y --no-install-recommends \
 	openjdk-7-jre-headless \
 	unzip \
     && apt-get clean -y
