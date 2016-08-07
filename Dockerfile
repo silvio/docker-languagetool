@@ -1,20 +1,17 @@
-FROM debian:jessie
+FROM alpine:3.4
 
 MAINTAINER Silvio Fricke <silvio.fricke@gmail.com>
-
-RUN export DEBIAN_FRONTEND=noninteractive \
-    && echo "deb http://http.debian.net/debian jessie-backports main" > /etc/apt/sources.list.d/backports.list \
-    && apt-get update -y \
-    && apt-get install -y --no-install-recommends \
-	openjdk-8-jre-headless \
-	unzip \
-    && apt-get clean -y \
-    && rm -rf /var/lib/apt/lists/*
 
 ENV VERSION 3.4
 ADD https://www.languagetool.org/download/LanguageTool-$VERSION.zip /LanguageTool-$VERSION.zip
 
-RUN unzip LanguageTool-$VERSION.zip
+RUN apk update \
+    && apk add \
+	openjdk8-jre-base \
+	unzip \
+    && rm -rf /var/cache/apk \
+    && unzip LanguageTool-$VERSION.zip \
+    && rm LanguageTool-$VERSION.zip
 
 WORKDIR /LanguageTool-$VERSION
 
