@@ -2,7 +2,7 @@ FROM alpine:3.5
 
 MAINTAINER Silvio Fricke <silvio.fricke@gmail.com>
 
-ENV VERSION 3.6
+ENV VERSION 3.7
 ADD https://www.languagetool.org/download/LanguageTool-$VERSION.zip /LanguageTool-$VERSION.zip
 
 RUN apk update \
