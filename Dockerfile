@@ -19,5 +19,5 @@ RUN set -ex \
 
 WORKDIR /LanguageTool-$VERSION
 
-CMD ["java", "-cp", "languagetool-server.jar", "org.languagetool.server.HTTPServer", "--port", "8010", "--public" "--allow-origin" "'*'" ]
+CMD ["java", "-cp", "languagetool-server.jar", "org.languagetool.server.HTTPServer", "--port", "8010", "--public", "--allow-origin", "'*'"]
 EXPOSE 8010
