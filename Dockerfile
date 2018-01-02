@@ -2,7 +2,7 @@ FROM debian:jessie
 
 MAINTAINER Silvio Fricke <silvio.fricke@gmail.com>
 
-ENV VERSION 3.9
+ENV VERSION 4.0
 ADD https://www.languagetool.org/download/LanguageTool-$VERSION.zip /LanguageTool-$VERSION.zip
 
 RUN set -ex \
