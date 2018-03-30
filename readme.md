@@ -20,3 +20,13 @@ The Server is running on port 8010, this port should exposed.
     $ docker run --rm -p 8010:8010 silviof/docker-languagetool
 
 Or you run it in background via `-d`-option.
+
+
+## ngram support
+
+To support [ngrams] you need an additional volume or directory mounted to the
+`/ngrams` directory. For that add a `-v` to the `docker run`-command.
+
+    docker run ... -v /path/to/ngrams:/ngrams ...
+
+[ngrams]: http://wiki.languagetool.org/finding-errors-using-n-gram-data
