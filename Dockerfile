@@ -9,6 +9,7 @@ RUN set -ex \
     && apt-get clean \
     && apt-get update -y \
     && apt-get -t jessie-backports install -y \
+        bash \
         openjdk-8-jre-headless \
         unzip
 
