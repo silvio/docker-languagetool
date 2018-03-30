@@ -9,8 +9,8 @@ RUN set -ex \
     && apt-get clean \
     && apt-get update -y \
     && apt-get -t jessie-backports install -y \
-	openjdk-8-jre-headless \
-	unzip
+        openjdk-8-jre-headless \
+        unzip
 
 ENV VERSION 4.0
 ADD https://www.languagetool.org/download/LanguageTool-$VERSION.zip /LanguageTool-$VERSION.zip
