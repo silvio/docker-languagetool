@@ -21,5 +21,8 @@ RUN unzip LanguageTool-$VERSION.zip \
 
 WORKDIR /LanguageTool-$VERSION
 
-CMD ["java", "-cp", "languagetool-server.jar", "org.languagetool.server.HTTPServer", "--port", "8010", "--public", "--allow-origin", "'*'"]
+ADD misc/start.sh /start.sh
+RUN chmod a+x /start.sh
+
+CMD [ "/start.sh" ]
 EXPOSE 8010
