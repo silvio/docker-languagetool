@@ -13,7 +13,7 @@ RUN set -ex \
         openjdk-8-jre-headless \
         unzip
 
-ENV VERSION 4.2
+ENV VERSION 4.4
 ADD https://www.languagetool.org/download/LanguageTool-$VERSION.zip /LanguageTool-$VERSION.zip
 
 RUN unzip LanguageTool-$VERSION.zip \
