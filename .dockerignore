@@ -1,0 +1,9 @@
+*.swp
+*.zip
+.dockerignore
+.git
+.gitignore
+.travis.yml
+Makefile
+ngrams
+readme.md
