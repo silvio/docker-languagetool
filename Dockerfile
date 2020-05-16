@@ -18,7 +18,7 @@ ADD https://www.languagetool.org/download/LanguageTool-$VERSION.zip /LanguageToo
 RUN unzip LanguageTool-$VERSION.zip \
     && rm LanguageTool-$VERSION.zip
 
-MV /LanguageTool-$VERSION /LanguageTool
+ADD /LanguageTool-$VERSION /LanguageTool
 
 WORKDIR /LanguageTool
 
