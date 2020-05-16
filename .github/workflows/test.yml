@@ -13,7 +13,7 @@ jobs:
       uses: rzhade3/docker-languagetool@7c2a7a869ab433e21110999ab022953ffe9f7ea4
       with:
         language: 'en-US'
-        string: '/docker-languagetool/README.md'
+        string: 'README.md'
     # Use the output from the `hello` step
     - name: Get the errors
       run: echo "Some errors were found, i.e. ${{ steps.hello.outputs.errors }}"
