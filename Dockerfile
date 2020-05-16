@@ -12,15 +12,6 @@ RUN set -ex \
         openjdk-8-jre-headless \
         unzip
 
-ENV VERSION 4.9.1
-ADD https://www.languagetool.org/download/LanguageTool-$VERSION.zip /LanguageTool-$VERSION.zip
-
-RUN unzip LanguageTool-$VERSION.zip \
-    && mv LanguageTool-$VERSION LanguageTool \
-    && rm LanguageTool-$VERSION.zip
-
-WORKDIR /LanguageTool
-
 ADD misc/entrypoint.sh /entrypoint.sh
 RUN chmod a+x /entrypoint.sh
 RUN mkdir /nonexistent && touch /nonexistent/.languagetool.cfg
