@@ -16,9 +16,8 @@ ENV VERSION 4.9.1
 ADD https://www.languagetool.org/download/LanguageTool-$VERSION.zip /LanguageTool-$VERSION.zip
 
 RUN unzip LanguageTool-$VERSION.zip \
+    && mv LanguageTool-$VERSION LanguageTool \
     && rm LanguageTool-$VERSION.zip
-
-ADD /LanguageTool-$VERSION /LanguageTool
 
 WORKDIR /LanguageTool
 
