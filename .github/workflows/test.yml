@@ -1,0 +1,19 @@
+name: CI
+
+on: [push]
+
+jobs:
+  test_job:
+    runs-on: ubuntu-latest
+
+    name: A spellchecking and grammar checking job
+    steps:
+    - name: Hello world action step
+      id: hello
+      uses: rzhade3/docker-languagetool@v1
+      with:
+        language: 'en-US'
+        string: 'Thsi is a sentence wth a couple errors'
+    # Use the output from the `hello` step
+    - name: Get the errors
+      run: echo "Some errors were found, i.e. ${{ steps.hello.outputs.time }}"
