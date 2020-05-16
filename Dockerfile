@@ -24,4 +24,4 @@ ADD misc/start.sh /start.sh
 RUN chmod a+x /start.sh
 RUN mkdir /nonexistent && touch /nonexistent/.languagetool.cfg
 
-ENTRYPOINT ["/start.sh"]
+ENTRYPOINT /start.sh

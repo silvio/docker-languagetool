@@ -10,8 +10,8 @@ inputs:
     description: 'The string to be parsed'
     required: true
 outputs:
-  time: # id of output
-    description: 'The time we greeted you'
+  errors: # id of output
+    description: 'The errors that were outputted'
 runs:
   using: 'docker'
   image: 'Dockerfile'
