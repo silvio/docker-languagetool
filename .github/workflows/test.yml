@@ -10,7 +10,7 @@ jobs:
     steps:
     - name: Hello world action step
       id: hello
-      uses: rzhade3/docker-languagetool@v2
+      uses: rzhade3/docker-languagetool@v4
       with:
         language: 'en-US'
         string: 'Thsi a is sntence wth a couple errors'
