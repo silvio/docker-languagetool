@@ -10,7 +10,7 @@ jobs:
     steps:
     - name: Hello world action step
       id: hello
-      uses: rzhade3/docker-languagetool@870197e06ed8d21327394b9065113193e522457b
+      uses: rzhade3/docker-languagetool@v5
       with:
         language: 'en-US'
         string: 'COPYING.txt'
