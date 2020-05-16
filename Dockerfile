@@ -18,7 +18,9 @@ ADD https://www.languagetool.org/download/LanguageTool-$VERSION.zip /LanguageToo
 RUN unzip LanguageTool-$VERSION.zip \
     && rm LanguageTool-$VERSION.zip
 
-WORKDIR /LanguageTool-$VERSION
+MV /LanguageTool-$VERSION /LanguageTool
+
+WORKDIR /LanguageTool
 
 ADD misc/start.sh /start.sh
 RUN chmod a+x /start.sh

@@ -13,7 +13,7 @@ jobs:
       uses: rzhade3/docker-languagetool@v5
       with:
         language: 'en-US'
-        string: 'COPYING.txt'
+        string: '/docker-languagetool/README.md'
     # Use the output from the `hello` step
     - name: Get the errors
       run: echo "Some errors were found, i.e. ${{ steps.hello.outputs.errors }}"
