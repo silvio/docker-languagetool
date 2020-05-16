@@ -3,4 +3,4 @@
 EXTRAOPTIONS=""
 [ -d "/ngrams" ] && EXTRAOPTIONS=" --languageModel /ngrams "
 
-java -cp languagetool-server.jar  org.languagetool.server.HTTPServer --port 8010 --public --allow-origin '*' ${EXTRAOPTIONS}
+java -jar languagetool-commandline.jar -l $1 --json ${EXTRAOPTIONS} - $2

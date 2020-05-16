@@ -1,0 +1,20 @@
+# action.yml
+name: 'Docker Language Tool'
+description: 'Runs grammar and spellcheck on a string'
+inputs:
+  language: # what language to parse in
+    description: 'What language to parse in'
+    required: false
+    default: 'en-US'
+  string:
+    description: 'The string to be parsed'
+    required: true
+outputs:
+  time: # id of output
+    description: 'The time we greeted you'
+runs:
+  using: 'docker'
+  image: 'Dockerfile'
+  args:
+    - ${{ inputs.language }}
+    - ${{ inputs.string }}
