@@ -1,3 +1,5 @@
 #!/bin/bash
 
-java -jar languagetool-commandline.jar -l $1 --json ${EXTRAOPTIONS} - $2
+echo "hello Wrodl"
+ls -l
+java -jar /languagetool-commandline.jar -l $1 --json ${EXTRAOPTIONS} - $2
