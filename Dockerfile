@@ -20,8 +20,8 @@ RUN unzip LanguageTool-$VERSION.zip \
 
 WORKDIR /LanguageTool-$VERSION
 
-ADD misc/start.sh /start.sh
-RUN chmod a+x /start.sh
+ADD misc/start.sh start.sh
+RUN chmod a+x start.sh
 RUN mkdir /nonexistent && touch /nonexistent/.languagetool.cfg
 
-ENTRYPOINT ["/start.sh"]
+ENTRYPOINT ["start.sh"]

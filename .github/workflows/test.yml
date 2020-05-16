@@ -13,7 +13,7 @@ jobs:
       uses: rzhade3/docker-languagetool@v2
       with:
         language: 'en-US'
-        string: 'Thsi is a sentence wth a couple errors'
+        string: 'Thsi a is sntence wth a couple errors'
     # Use the output from the `hello` step
     - name: Get the errors
       run: echo "Some errors were found, i.e. ${{ steps.hello.outputs.time }}"
