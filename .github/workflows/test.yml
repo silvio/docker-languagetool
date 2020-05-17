@@ -10,7 +10,7 @@ jobs:
     steps:
     - name: Hello world action step
       id: hello
-      uses: rzhade3/docker-languagetool@7c2a7a869ab433e21110999ab022953ffe9f7ea4
+      uses: rzhade3/docker-languagetool@b1c2169ff7e43be08494df2b858e36f6624471c5
       with:
         language: 'en-US'
         string: 'README.md'
