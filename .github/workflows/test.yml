@@ -8,6 +8,7 @@ jobs:
 
     name: A spellchecking and grammar checking job
     steps:
+    - uses: actions/checkout@v2
     - name: Hello world action step
       id: hello
       uses: rzhade3/docker-languagetool@15a5d6c0f59e21047baf89ee7696da42817526da
