@@ -1,8 +1,12 @@
-FROM openjdk:14-alpine
+FROM adoptopenjdk/openjdk14:jre-14.0.2_12
 
-MAINTAINER Silvio Fricke <silvio.fricke@gmail.com>
+MAINTAINER Kelvin Stuten <kelvinstuten@gmail.com>
 
-RUN apk add --no-cache libgomp gcompat libstdc++
+# RUN apk add --no-cache libgomp gcompat libstdc++
+RUN apt-get update -y \
+    && apt-get install -y \
+        wget \
+        unzip
 
 ENV VERSION 5.0
 RUN wget https://www.languagetool.org/download/LanguageTool-$VERSION.zip && \
