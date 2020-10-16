@@ -1,4 +1,4 @@
-FROM adoptopenjdk/openjdk14:jre-14.0.2_12
+FROM adoptopenjdk/openjdk14:aarch64-ubuntu-jre-14.0.2_12
 
 MAINTAINER Kelvin Stuten <kelvinstuten@gmail.com>
 
