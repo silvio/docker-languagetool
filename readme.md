@@ -4,7 +4,7 @@
 [LanguageTool] is an Open Source proof­reading software for English, French,
 German, Polish, and more than 20 other languages.
 
-This version is based on the version of [silvio/docker-languagetool]: https://github.com/silvio/docker-languagetool but modified to run on ARM64 devices like the Raspberry Pi. 
+This version is based on the version of silvio/docker-languagetool (https://github.com/silvio/docker-languagetool) but modified to run on ARM64 devices like the Raspberry Pi. 
 
 ## ngram support
 
