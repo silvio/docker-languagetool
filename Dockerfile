@@ -1,6 +1,9 @@
+COPY qemu-arm-static /usr/bin
+
 FROM adoptopenjdk/openjdk14:aarch64-ubuntu-jre-14.0.2_12
 # FROM adoptopenjdk/openjdk14:latest
 COPY qemu-arm-static /usr/bin
+
 
 RUN apt-get update -y \
     && apt-get install -y \
