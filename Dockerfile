@@ -1,5 +1,4 @@
 FROM adoptopenjdk/openjdk14:aarch64-ubuntu-jre-14.0.2_12
-# COPY qemu-arm-static /usr/bin
 
 COPY qemu-aarch64-static /usr/bin
 
