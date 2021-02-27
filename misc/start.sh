@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/bin/bash
 
 EXTRAOPTIONS=""
 [ -d "/ngrams" ] && EXTRAOPTIONS=" --languageModel /ngrams "
