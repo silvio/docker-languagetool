@@ -1,6 +1,6 @@
-#!/bin/bash
+# FROM adoptopenjdk/openjdk14:aarch64-ubuntu-jre-14.0.2_12
 
-FROM adoptopenjdk/openjdk14:aarch64-ubuntu-jre-14.0.2_12
+FROM adoptopenjdk/openjdk14:armv7l-ubuntu-jre-14.0.2_12
 
 RUN apt-get update -y \
     && apt-get install -y \
