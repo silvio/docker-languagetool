@@ -6,11 +6,11 @@ RUN apt-get update -y \
         unzip
 
 ENV VERSION 5.2
-RUN wget https://www.languagetool.org/download/LanguageTool-$VERSION.zip && \
-    unzip LanguageTool-$VERSION.zip && \
-    rm LanguageTool-$VERSION.zip
+RUN wget https://www.languagetool.org/download/LanguageTool-5.2.zip && \
+    unzip LanguageTool-5.2.zip && \
+    rm LanguageTool-5.2.zip
 
-WORKDIR /LanguageTool-$VERSION
+WORKDIR /LanguageTool-5.2
 
 ADD misc/start.sh /start.sh
 CMD [ "sh", "/start.sh" ]
