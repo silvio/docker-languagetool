@@ -4,7 +4,7 @@
 [LanguageTool] is an Open Source proof­reading software for English, French,
 German, Polish, Dutch, and more than 20 other languages.
 
-You can use the LanguageTools with a [firefox] or [chrome] plugin.
+You can use LanguageTool with a [firefox] or [chrome] plugin to have proof reading in the browser.
 
 This is a Dockerfile to get the languagetools running on an ARM system without java. 
 
