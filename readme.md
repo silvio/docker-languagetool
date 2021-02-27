@@ -4,15 +4,15 @@
 [LanguageTool] is an Open Source proof­reading software for English, French,
 German, Polish, Dutch, and more than 20 other languages.
 
-You can use LanguageTool with a [firefox] or [chrome] plugin to have proof reading in the browser.
+You can use LanguageTool with a [Firefox] or [Chrome] plugin to have proof reading in the browser.
 
 This is a Dockerfile to get the languagetools running on an ARM system without java. 
 
 The repository is forked from [silvio/docker-languagetool] and modified to run on ARM devices like the Raspberry Pi.
 
 [LanguageTool]: https://www.languagetool.org/
-[firefox]: https://addons.mozilla.org/firefox/addon/languagetoolfx/
-[chrome]: https://chrome.google.com/webstore/detail/grammar-and-spell-checker/oldceeleldhonbafppcapldpdifcinji
+[Firefox]: https://addons.mozilla.org/firefox/addon/languagetoolfx/
+[Chrome]: https://chrome.google.com/webstore/detail/grammar-and-spell-checker/oldceeleldhonbafppcapldpdifcinji
 [silvio/docker-languagetool]: https://github.com/silvio/docker-languagetool
 
 # Usage
