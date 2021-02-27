@@ -19,9 +19,9 @@ The repository is forked from [silvio/docker-languagetool] and modified to run o
 
 The Server is running on port 8010, this port should exposed.
 
-    $ docker pull kelvinstuten/docker-languagetool-arm
+    $ docker pull kelvinstuten/docker-languagetool-arm:latest
     [...]
-    $ docker run --rm -p 8010:8010 kelvinstuten/docker-languagetool-arm
+    $ docker run --rm -p 8010:8010 kelvinstuten/docker-languagetool-arm:latest
 
 Or you run it in background via `-d`-option.
 
