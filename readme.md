@@ -4,13 +4,16 @@
 [LanguageTool] is an Open Source proof­reading software for English, French,
 German, Polish, Dutch, and more than 20 other languages.
 
-You can use the LanguageTools with a [firefox-plugin] or [chrome-plugin].
+You can use the LanguageTools with a [firefox] or [chrome] plugin.
 
-This is a Dockerfile to get the languagetools running on a system without java.
+This is a Dockerfile to get the languagetools running on an ARM system without java. 
+
+The repository is forked from [silvio/docker-languagetool] and modified to run on ARM devices like the Raspberry Pi.
 
 [LanguageTool]: https://www.languagetool.org/
-[firefox-plugin]: https://addons.mozilla.org/firefox/addon/languagetoolfx/
-[chrome-plugin]: https://chrome.google.com/webstore/detail/grammar-and-spell-checker/oldceeleldhonbafppcapldpdifcinji
+[firefox]: https://addons.mozilla.org/firefox/addon/languagetoolfx/
+[chrome]: https://chrome.google.com/webstore/detail/grammar-and-spell-checker/oldceeleldhonbafppcapldpdifcinji
+[silvio/docker-languagetool]: https://github.com/silvio/docker-languagetool
 
 # Usage
 
@@ -55,8 +58,4 @@ Download English ngrams with the commands:
 
 One can use them using web browser plugin "Local server (localhost)" setting by running:
 
-    docker run -d --name languagetool -p 127.0.0.1:8081:8010 -v `pwd`/ngrams:/ngrams:ro --restart=unless-stopped kelvinstuten/languagetool-arm
-
-## Credits
-
-This version is based on the version of [silvio/docker-languagetool](https://github.com/silvio/docker-languagetool) but modified to run on ARM devices like the Raspberry Pi. 
+    docker run -d --name languagetool -p 127.0.0.1:8081:8010 -v `pwd`/ngrams:/ngrams:ro --restart=unless-stopped kelvinstuten/languagetool-arm 
