@@ -5,19 +5,45 @@ prepare:
 build:
 	docker build -t silvio/docker-languagetool .
 
-test:
+test: test-cleanup.1
+test: TESTIPADDRESS=$(subst ",,$(shell docker inspect languagetool | jq '.[0].NetworkSettings.IPAddress'))
+test: test-print-ip-address
+test: test-start
+test: test-run-test-lang
+test: test-run-test-en
+test: test-run-test-fr
+test: test-cleanup.2
+
+test-start:
 	docker run -d --name languagetool -p 8010:8010 silvio/docker-languagetool
-	sleep 5
+	sleep 3
 
-	echo "get all languages"
-	curl -X GET --header 'Accept: application/json' 'http://172.17.0.1:8010/v2/languages'
+test-print-ip-address:
+	@echo "IP address of languagetools docker container: $(TESTIPADDRESS)"
 
-	echo "test en-US"
-	curl -X POST --header 'Content-Type: application/x-www-form-urlencoded' --header 'Accept: application/json' -d 'text=hello%20woorld&language=en-US&motherTongue=de-DE&enabledOnly=false' 'http://172.17.0.1:8010/v2/check'
+test-run-test-lang:
+	curl \
+		-X GET \
+		--header 'Accept: application/json' \
+		'http://$(TESTIPADDRESS):8010/v2/languages'
 
-	echo "test fr"
-	curl -X POST --header 'Content-Type: application/x-www-form-urlencoded' --header 'Accept: application/json' -d 'text=hello%20woorld&language=fr&motherTongue=de-DE&enabledOnly=false' 'http://172.17.0.1:8010/v2/check'
-stop:
+test-run-test-en:
+	curl \
+		-X POST \
+		--header 'Content-Type: application/x-www-form-urlencoded' \
+		--header 'Accept: application/json' \
+		-d 'text=hello%20woorld&language=en-US&motherTongue=de-DE&enabledOnly=false' \
+		'http://$(TESTIPADDRESS):8010/v2/check'
+
+test-run-test-fr:
+	curl -X POST \
+		--header 'Content-Type: application/x-www-form-urlencoded' \
+		--header 'Accept: application/json' \
+		-d 'text=hello%20woorld&language=fr&motherTongue=de-DE&enabledOnly=false' \
+		'http://$(TESTIPADDRESS):8010/v2/check'
+
+.PHONY: test-cleanup
+test-cleanup.%:
 	docker stop languagetool
 	docker rm languagetool
 
