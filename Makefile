@@ -44,6 +44,6 @@ test-run-test-fr:
 
 .PHONY: test-cleanup
 test-cleanup.%:
-	docker stop languagetool
-	docker rm languagetool
+	-docker stop languagetool
+	-docker rm languagetool
 
