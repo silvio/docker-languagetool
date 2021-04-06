@@ -1,10 +1,12 @@
 FROM openjdk:14-alpine
 
+# see Makefile.version
+ARG VERSION
+
 MAINTAINER Silvio Fricke <silvio.fricke@gmail.com>
 
 RUN apk add --no-cache libgomp gcompat libstdc++
 
-ENV VERSION 5.3
 RUN wget https://www.languagetool.org/download/LanguageTool-$VERSION.zip && \
     unzip LanguageTool-$VERSION.zip && \
     rm LanguageTool-$VERSION.zip

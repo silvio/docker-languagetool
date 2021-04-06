@@ -1,9 +1,12 @@
 
+include Makefile.version
+
 prepare:
 	sudo apt-get -qq -y install curl
 
 build:
-	docker build -t silvio/docker-languagetool .
+	docker build $(BUILDARG_VERSION) -t silvio/docker-languagetool:latest .
+	docker tag silvio/docker-languagetool:latest silvio/docker-languagetool:$(VERSION)
 
 test: test-cleanup.1
 test: TESTIPADDRESS=$(subst ",,$(shell docker inspect languagetool | jq '.[0].NetworkSettings.IPAddress'))
@@ -47,3 +50,11 @@ test-cleanup.%:
 	-docker stop languagetool
 	-docker rm languagetool
 
+.PHONY: tag
+tag: tag-push
+
+.PHONY: tag-push
+tag-push: build
+tag-push:
+	docker push silvio/docker-languagetool:latest
+	docker push silvio/docker-languagetool:$(VERSION)

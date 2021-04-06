@@ -1,0 +1,2 @@
+VERSION := 5.3
+BUILDARG_VERSION := --build-arg VERSION=$(VERSION)
