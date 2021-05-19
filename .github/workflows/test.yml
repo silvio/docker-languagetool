@@ -1,0 +1,27 @@
+
+name: Test for silviof/docker-languagetool
+
+on: [ push ]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v2
+
+      - name: Set environment variables
+        run: |
+          make envout >> ${GITHUB_ENV}
+
+      - name: Prepare system
+        run: |
+          make prepare
+
+      - name: Build Docker image
+        run: |
+          make build
+
+      - name: Run tests
+        run: |
+          make test
