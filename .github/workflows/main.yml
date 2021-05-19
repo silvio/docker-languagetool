@@ -1,11 +1,13 @@
 
-name: Create and Test Dockerimage for silvio/docker-languagetool
+name: Release for silvio/docker-languagetool
 
 on:
   push:
-    branches: [ master ]
-
-  workflow_dispatch:
+    tags:
+      - '[0-9]+.[0-9]+'
+      - '[0-9]+.[0-9]+.[0-9]+'
+      - '[0-9]+.[0-9]+-update[0-9]+'
+      - '[0-9]+.[0-9]+.[0-9]+-update[0-9]+'
 
 jobs:
   docker:
