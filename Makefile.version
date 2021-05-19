@@ -1,6 +1,8 @@
 VERSION := 5.3
 BUILDARG_VERSION := --build-arg VERSION=$(VERSION)
+IMAGENAME := docker.io/silvio/docker-languagetool
 
 envout:
 	@echo "VERSION=$(VERSION)"
 	@echo "BUILDARG_VERSION=$(BUILDARG_VERSION)"
+	@echo "IMAGENAME=$(IMAGENAME)"

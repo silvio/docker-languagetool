@@ -5,8 +5,8 @@ prepare:
 	sudo apt-get -qq -y install curl
 
 build:
-	docker build $(BUILDARG_VERSION) -t silvio/docker-languagetool:latest .
-	docker tag silvio/docker-languagetool:latest silvio/docker-languagetool:$(VERSION)
+	docker build $(BUILDARG_VERSION) -t $(IMAGENAME):latest .
+	docker tag $(IMAGENAME):latest $(IMAGENAME):$(VERSION)
 
 test: test-cleanup.1
 test: TESTIPADDRESS=$(subst ",,$(shell docker inspect languagetool | jq '.[0].NetworkSettings.IPAddress'))
@@ -18,7 +18,7 @@ test: test-run-test-fr
 test: test-cleanup.2
 
 test-start:
-	docker run -d --name languagetool -p 8010:8010 silvio/docker-languagetool
+	docker run -d --name languagetool -p 8010:8010 $(IMAGENAME):$(VERSION)
 	sleep 3
 
 test-print-ip-address:
@@ -55,5 +55,5 @@ tag: tag-push
 
 .PHONY: tag-push
 tag-push:
-	docker push silvio/docker-languagetool:latest
-	docker push silvio/docker-languagetool:$(VERSION)
+	docker push $(IMAGENAME):latest
+	docker push $(IMAGENAME):$(VERSION)
