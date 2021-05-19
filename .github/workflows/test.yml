@@ -1,7 +1,9 @@
 
 name: Test for silviof/docker-languagetool
 
-on: [ push ]
+on:
+  pull_request:
+  workflow_dispatch:
 
 jobs:
   build:
