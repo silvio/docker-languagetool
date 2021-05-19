@@ -3,3 +3,4 @@ BUILDARG_VERSION := --build-arg VERSION=$(VERSION)
 
 envout:
 	@echo "VERSION=$(VERSION)"
+	@echo "BUILDARG_VERSION=$(BUILDARG_VERSION)"

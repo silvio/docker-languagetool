@@ -54,7 +54,6 @@ test-cleanup.%:
 tag: tag-push
 
 .PHONY: tag-push
-tag-push: build
 tag-push:
 	docker push silvio/docker-languagetool:latest
 	docker push silvio/docker-languagetool:$(VERSION)
