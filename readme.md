@@ -29,7 +29,7 @@ docker run --name languagetool \
                         --read-only \
                         --mount type=bind,src=/tmp/languagetool/tmp,dst=/tmp \
                         -p 127.0.0.1:8010:8010 \
-                        --memory 412m --memory-swap 200m \
+                        --memory 412m --memory-swap 500m \
                         -e EXTRAOPTIONS="-Xmx382M" \
                         silviof/docker-languagetool:latest
 ```
