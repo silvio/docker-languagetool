@@ -1,0 +1,45 @@
+
+name: Create and Test Dockerimage for silvio/docker-languagetool
+
+on:
+  push:
+    branches: [ master ]
+
+  workflow_dispatch:
+
+jobs:
+  docker:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v2
+
+      - name: Set environment variables
+        run: |
+          make envout >> ${GITHUB_ENV}
+
+      - name: show env debug
+        run: |
+          echo $VERSION
+
+      - name: Prepare system
+        run: |
+          make prepare
+
+      - name: Build Docker image
+        run: |
+          make build
+
+      - name: Run tests
+        run: |
+          make test
+
+      - name: Login to DockerHub
+        if: github.event_name != 'pull_request'
+        uses: docker/login-action@v1
+        with:
+          username: ${{ secrets.DOCKERHUB_USERNAME }}
+          password: ${{ secrets.DOCKERHUB_PASSWORD }}
+      - name: Make tag
+        run: |
+          make tag
