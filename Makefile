@@ -1,6 +1,11 @@
 
 include Makefile.version
 
+envout:
+	@echo "VERSION=$(VERSION)"
+	@echo "BUILDARG_VERSION=$(BUILDARG_VERSION)"
+	@echo "IMAGENAME=$(IMAGENAME)"
+
 prepare:
 	sudo apt-get -qq -y install curl
 
