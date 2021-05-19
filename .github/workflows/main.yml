@@ -34,12 +34,16 @@ jobs:
         run: |
           make test
 
-      - name: Login to DockerHub
-        if: github.event_name != 'pull_request'
-        uses: docker/login-action@v1
-        with:
-          username: ${{ secrets.DOCKERHUB_USERNAME }}
-          password: ${{ secrets.DOCKERHUB_PASSWORD }}
-      - name: Make tag
+      - name: Push tag
         run: |
-          make tag
+          rm -f $HOME/.docker/config.json
+          docker login --username=${{secrets.DOCKERHUB_USERNAME}} --password=${{secrets.DOCKERHUB_PASSWORD}} docker.io
+          docker push silvio/docker-languagetool:latest
+          docker push silvio/docker-languagetool:${{ env.VERSION }}
+
+      - name: Logout Docker
+        if: ${{ always() }}
+        run: |
+          docker logout
+          rm -f $HOME/.docker/config.json
+
