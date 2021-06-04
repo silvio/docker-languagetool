@@ -5,13 +5,14 @@ envout:
 	@echo "VERSION=$(VERSION)"
 	@echo "BUILDARG_VERSION=$(BUILDARG_VERSION)"
 	@echo "IMAGENAME=$(IMAGENAME)"
+	@echo "BUILDARG_PLATFORM=$(BUILDARG_PLATFORM)"
 
 prepare:
 	sudo apt-get -qq -y install curl
 
 build:
-	docker build $(BUILDARG_VERSION) -t $(IMAGENAME):latest .
-	docker tag $(IMAGENAME):latest $(IMAGENAME):$(VERSION)
+	docker buildx build $(BUILDARG_VERSION) $(BUILDARG_PLATFORM) -t $(IMAGENAME):latest .
+	docker buildx build $(BUILDARG_VERSION) --load -t $(IMAGENAME):latest .
 
 test: test-cleanup.1
 test: TESTIPADDRESS=$(subst ",,$(shell docker inspect languagetool | jq '.[0].NetworkSettings.IPAddress'))
@@ -23,7 +24,7 @@ test: test-run-test-fr
 test: test-cleanup.2
 
 test-start:
-	docker run -d --name languagetool -p 8010:8010 $(IMAGENAME):$(VERSION)
+	docker run -d --name languagetool -p 8010:8010 $(IMAGENAME):latest
 	sleep 3
 
 test-print-ip-address:
@@ -60,5 +61,5 @@ tag: tag-push
 
 .PHONY: tag-push
 tag-push:
-	docker push $(IMAGENAME):latest
-	docker push $(IMAGENAME):$(VERSION)
+	docker buildx build $(BUILDARG_VERSION) $(BUILDARG_PLATFORM) -t $(IMAGENAME):latest . --push
+	docker buildx build $(BUILDARG_VERSION) $(BUILDARG_PLATFORM) -t $(IMAGENAME):$(VERSION) . --push

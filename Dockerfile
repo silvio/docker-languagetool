@@ -1,11 +1,11 @@
-FROM openjdk:14-alpine
+FROM openjdk:16-slim-buster
 
 # see Makefile.version
 ARG VERSION
 
 MAINTAINER Silvio Fricke <silvio.fricke@gmail.com>
 
-RUN apk add --no-cache libgomp gcompat libstdc++
+RUN apt-get update && apt-get install -y wget unzip && rm -rf /var/lib/apt/lists/*
 
 RUN wget https://www.languagetool.org/download/LanguageTool-$VERSION.zip && \
     unzip LanguageTool-$VERSION.zip && \
