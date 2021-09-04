@@ -7,7 +7,7 @@ RUN apt-get update -y \
         wget \
         unzip
 
-ENV VERSION 5.2
+ENV VERSION 5.4
 RUN wget https://www.languagetool.org/download/LanguageTool-$VERSION.zip && \
     unzip LanguageTool-$VERSION.zip && \
     rm LanguageTool-$VERSION.zip
