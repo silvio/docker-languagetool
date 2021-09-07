@@ -34,6 +34,8 @@ docker run --name languagetool \
                         silviof/docker-languagetool:latest
 ```
 
+Route information can be found at https://languagetool.org/http-api/swagger-ui/#/default, an easy route to test that it's running is `/v2/languages`.
+
 ## ngram support
 
 To support [ngrams] you need an additional volume or directory mounted to the
