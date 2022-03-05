@@ -2,6 +2,7 @@
 name: Release for silvio/docker-languagetool
 
 on:
+  workflow_dispatch:
   push:
     tags:
       - '[0-9]+.[0-9]+'
