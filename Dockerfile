@@ -1,9 +1,6 @@
-FROM openjdk:16-slim-buster
+FROM openjdk:slim
 
-# see Makefile.version
-ARG VERSION
-
-MAINTAINER Silvio Fricke <silvio.fricke@gmail.com>
+ARG VERSION=5.6
 
 RUN apt-get update && apt-get install -y wget unzip && rm -rf /var/lib/apt/lists/*
 

@@ -1,60 +1,60 @@
 
-include Makefile.version
+LANGUAGETOOL_VERSION := 5.6
+TRIVY_VERSION := 0.24.2
 
-envout:
-	@echo "VERSION=$(VERSION)"
-	@echo "BUILDARG_VERSION=$(BUILDARG_VERSION)"
-	@echo "IMAGENAME=$(IMAGENAME)"
-	@echo "BUILDARG_PLATFORM=$(BUILDARG_PLATFORM)"
+BUILDARG_VERSION := --build-arg VERSION=$(LANGUAGETOOL_VERSION)
+IMAGENAME := docker.io/silviof/docker-languagetool
+BUILDARG_PLATFORM := --platform linux/amd64,linux/arm64/v8
 
-prepare:
-	sudo apt-get -qq -y install curl
+ci-deps:
+	apt-get -qq -y install \
+		curl \
+		wget \
+		ca-certificates \
+		gnupg \
+		lsb-release \
+		qemu-user-static \
+		binfmt-support
 
-build:
+ci-deps-docker:
+	curl -fsSL https://download.docker.com/linux/debian/gpg | gpg --dearmor -o /usr/share/keyrings/docker-archive-keyring.gpg && \
+	echo "deb [arch=$(shell dpkg --print-architecture) signed-by=/usr/share/keyrings/docker-archive-keyring.gpg] https://download.docker.com/linux/debian $(shell lsb_release -cs) stable" |\
+	tee /etc/apt/sources.list.d/docker.list > /dev/null && \
+	cat /etc/apt/sources.list.d/docker.list && \
+	apt-get update && \
+	apt-get -qq -y install \
+		docker-ce \
+		docker-ce-cli \
+		containerd.io
+
+ci-deps-trivy:
+	wget https://github.com/aquasecurity/trivy/releases/download/v$(TRIVY_VERSION)/trivy_$(TRIVY_VERSION)_Linux-64bit.deb && \
+	dpkg -i trivy_$(TRIVY_VERSION)_Linux-64bit.deb
+
+ci-setup-buildx:
+	docker run --privileged --rm tonistiigi/binfmt --install all
+	docker buildx create --name mybuilder
+	docker buildx use mybuilder
+
+ci-prepare: ci-deps ci-deps-docker ci-deps-trivy ci-setup-buildx
+
+ci-build: ci-prepare
 	docker buildx build $(BUILDARG_VERSION) $(BUILDARG_PLATFORM) -t $(IMAGENAME):latest .
 	docker buildx build $(BUILDARG_VERSION) --load -t $(IMAGENAME):latest .
 
-test: test-cleanup.1
-test: TESTIPADDRESS=$(subst ",,$(shell docker inspect languagetool | jq '.[0].NetworkSettings.IPAddress'))
-test: test-print-ip-address
-test: test-start
-test: test-run-test-lang
-test: test-run-test-en
-test: test-run-test-fr
-test: test-cleanup.2
+trivy:
+	trivy i \
+		--ignore-unfixed \
+		--exit-code 1 \
+		$(IMAGENAME):latest
 
-test-start:
-	docker run -d --name languagetool -p 8010:8010 $(IMAGENAME):latest
-	sleep 3
-
-test-print-ip-address:
-	@echo "IP address of languagetools docker container: $(TESTIPADDRESS)"
-
-test-run-test-lang:
-	curl \
-		-X GET \
-		--header 'Accept: application/json' \
-		'http://$(TESTIPADDRESS):8010/v2/languages'
-
-test-run-test-en:
-	curl \
-		-X POST \
-		--header 'Content-Type: application/x-www-form-urlencoded' \
-		--header 'Accept: application/json' \
-		-d 'text=hello%20woorld&language=en-US&motherTongue=de-DE&enabledOnly=false' \
-		'http://$(TESTIPADDRESS):8010/v2/check'
-
-test-run-test-fr:
-	curl -X POST \
-		--header 'Content-Type: application/x-www-form-urlencoded' \
-		--header 'Accept: application/json' \
-		-d 'text=hello%20woorld&language=fr&motherTongue=de-DE&enabledOnly=false' \
-		'http://$(TESTIPADDRESS):8010/v2/check'
-
-.PHONY: test-cleanup
-test-cleanup.%:
-	-docker stop languagetool
-	-docker rm languagetool
+docker-%:
+	docker run \
+		--rm \
+		--privileged -v /var/run/docker.sock:/var/run/docker.sock \
+		-v $(shell pwd):/data \
+		-w /data \
+		debian:stable sh -c "apt-get update && apt-get install make && make $*"
 
 .PHONY: tag
 tag: tag-push
