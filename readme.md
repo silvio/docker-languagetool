@@ -43,7 +43,7 @@ To support [ngrams] you need an additional volume or directory mounted to the
 
     docker run ... -v /path/to/ngrams:/ngrams ...
 
-[ngrams]: http://wiki.languagetool.org/finding-errors-using-n-gram-data
+[ngrams]: https://dev.languagetool.org/finding-errors-using-n-gram-data
 
 
 Download English ngrams with the commands:
