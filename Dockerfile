@@ -1,4 +1,4 @@
-FROM openjdk:16-slim-buster
+FROM eclipse-temurin:18
 
 # see Makefile.version
 ARG VERSION
