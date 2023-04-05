@@ -1,4 +1,4 @@
-FROM docker.io/library/eclipse-temurin:20
+FROM docker.io/library/eclipse-temurin:18
 
 # see Makefile.version
 ARG VERSION
