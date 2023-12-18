@@ -1,5 +1,6 @@
 # SPDX-License-Identifier: LGPL-3.0-or-later
-VERSION := 6.3
-BUILDARG_VERSION := --build-arg VERSION=$(VERSION)
+VERSION := 6.3a
+UNPACKED_VERSION := $(shell echo $(VERSION) | sed -e 's/\([0-9]\+\.[0-9]\+\)\(.*\)/\1/')
+BUILDARG_VERSION := --build-arg VERSION=$(VERSION) --build-arg UNPACKED_VERSION=$(UNPACKED_VERSION)
 IMAGENAME := docker.io/silviof/docker-languagetool
 BUILDARG_PLATFORM := --platform linux/amd64,linux/arm64/v8,linux/arm/v7

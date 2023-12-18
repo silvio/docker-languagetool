@@ -4,6 +4,7 @@ include Makefile.version
 
 envout:
 	@echo "VERSION=$(VERSION)"
+	@echo "UNPACKED_VERSION=$(UNPACKED_VERSION)"
 	@echo "BUILDARG_VERSION=$(BUILDARG_VERSION)"
 	@echo "IMAGENAME=$(IMAGENAME)"
 	@echo "BUILDARG_PLATFORM=$(BUILDARG_PLATFORM)"
@@ -11,14 +12,22 @@ envout:
 prepare:
 	sudo apt-get -qq -y install curl
 
-build:
+build: download
 	docker buildx build $(BUILDARG_VERSION) $(BUILDARG_PLATFORM) -t $(IMAGENAME):latest .
 	docker buildx build $(BUILDARG_VERSION) --load -t $(IMAGENAME):latest .
 
+download: LanguageTool-$(VERSION).zip
+	-rm -rf LanguageTool-$(VERSION) LanguageTool-$(UNPACKED_VERSION)
+	echo ":: unzipping LanguageTool-$(VERSION).zip"
+	unzip -o LanguageTool-$(VERSION).zip 2>&1 1>/dev/null
+
+LanguageTool-$(VERSION).zip:
+	curl -L https://www.languagetool.org/download/LanguageTool-$(VERSION).zip -o LanguageTool-$(VERSION).zip
+
 test: test-cleanup.1
+test: test-start
 test: TESTIPADDRESS=$(subst ",,$(shell docker inspect languagetool | jq '.[0].NetworkSettings.IPAddress'))
 test: test-print-ip-address
-test: test-start
 test: test-run-test-lang
 test: test-run-test-en
 test: test-run-test-fr
@@ -26,7 +35,7 @@ test: test-cleanup.2
 
 test-start:
 	docker run -d --name languagetool -p 8010:8010 $(IMAGENAME):latest
-	sleep 3
+	sleep 6
 
 test-print-ip-address:
 	@echo "IP address of languagetools docker container: $(TESTIPADDRESS)"
@@ -54,8 +63,8 @@ test-run-test-fr:
 
 .PHONY: test-cleanup
 test-cleanup.%:
-	-docker stop languagetool
-	-docker rm languagetool
+	-docker container stop languagetool
+	-docker container rm languagetool
 
 .PHONY: tag
 tag: tag-push

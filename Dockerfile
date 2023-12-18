@@ -3,14 +3,13 @@ FROM docker.io/library/eclipse-temurin:19
 
 # see Makefile.version
 ARG VERSION
+ARG UNPACKED_VERSION
 
 LABEL maintainer="Silvio Fricke <silvio.fricke@gmail.com>"
 
-RUN curl --remote-name https://languagetool.org/download/LanguageTool-"$VERSION".zip && \
-    jar xvf ./LanguageTool-"$VERSION".zip && \
-    rm LanguageTool-"$VERSION".zip
+ADD ./LanguageTool-"${UNPACKED_VERSION}" /LanguageTool-"${UNPACKED_VERSION}"
 
-WORKDIR /LanguageTool-"$VERSION"
+WORKDIR /LanguageTool-"${UNPACKED_VERSION}"
 
 COPY misc/start.sh .
 CMD [ "sh", "start.sh" ]
