@@ -6,9 +6,7 @@ ARG VERSION
 
 LABEL maintainer="Silvio Fricke <silvio.fricke@gmail.com>"
 
-RUN curl --remote-name https://languagetool.org/download/LanguageTool-"$VERSION".zip && \
-    jar xvf ./LanguageTool-"$VERSION".zip && \
-    rm LanguageTool-"$VERSION".zip
+ADD ./LanguageTool-"${VERSION}" /LanguageTool-"${VERSION}"
 
 WORKDIR /LanguageTool-"$VERSION"
 
