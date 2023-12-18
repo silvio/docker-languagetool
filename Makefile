@@ -25,9 +25,9 @@ LanguageTool-$(VERSION).zip:
 	curl -L https://www.languagetool.org/download/LanguageTool-$(VERSION).zip -o LanguageTool-$(VERSION).zip
 
 test: test-cleanup.1
+test: test-start
 test: TESTIPADDRESS=$(subst ",,$(shell docker inspect languagetool | jq '.[0].NetworkSettings.IPAddress'))
 test: test-print-ip-address
-test: test-start
 test: test-run-test-lang
 test: test-run-test-en
 test: test-run-test-fr
@@ -35,7 +35,7 @@ test: test-cleanup.2
 
 test-start:
 	docker run -d --name languagetool -p 8010:8010 $(IMAGENAME):latest
-	sleep 3
+	sleep 6
 
 test-print-ip-address:
 	@echo "IP address of languagetools docker container: $(TESTIPADDRESS)"
@@ -63,8 +63,8 @@ test-run-test-fr:
 
 .PHONY: test-cleanup
 test-cleanup.%:
-	-docker stop languagetool
-	-docker rm languagetool
+	-docker container stop languagetool
+	-docker container rm languagetool
 
 .PHONY: tag
 tag: tag-push
