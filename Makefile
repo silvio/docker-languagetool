@@ -4,6 +4,7 @@ include Makefile.version
 
 envout:
 	@echo "VERSION=$(VERSION)"
+	@echo "UNPACKED_VERSION=$(UNPACKED_VERSION)"
 	@echo "BUILDARG_VERSION=$(BUILDARG_VERSION)"
 	@echo "IMAGENAME=$(IMAGENAME)"
 	@echo "BUILDARG_PLATFORM=$(BUILDARG_PLATFORM)"
@@ -16,7 +17,7 @@ build: download
 	docker buildx build $(BUILDARG_VERSION) --load -t $(IMAGENAME):latest .
 
 download: LanguageTool-$(VERSION).zip
-	-rm -rf LanguageTool-$(VERSION) LanguageTool-$(VERSION)
+	-rm -rf LanguageTool-$(VERSION) LanguageTool-$(UNPACKED_VERSION)
 	echo ":: unzipping LanguageTool-$(VERSION).zip"
 	unzip -o LanguageTool-$(VERSION).zip 2>&1 1>/dev/null
 
