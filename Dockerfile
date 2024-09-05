@@ -12,6 +12,6 @@ ADD ./LanguageTool-"${UNPACKED_VERSION}" /LanguageTool-"${UNPACKED_VERSION}"
 WORKDIR /LanguageTool-"${UNPACKED_VERSION}"
 
 COPY misc/start.sh .
-CMD [ "sh", "start.sh" ]
+CMD [ "bash", "start.sh" ]
 USER nobody
 EXPOSE 8010
