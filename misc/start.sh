@@ -8,6 +8,9 @@ if [ -d "/ngrams" ]; then
     EXTRAOPTIONS="${EXTRAOPTIONS} --languageModel /ngrams"
 fi
 
+# iterate over environment variables starting with LT_
+# and write their names without the LT_ prefix and
+# their values to /tmp/config.properties
 for var in ${!LT_*}; do
   EXTRA_LT=true
   echo "${var#'LT_'}="${!var} >> /tmp/config.properties
