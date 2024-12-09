@@ -34,6 +34,7 @@ test: test-run-test-fr
 test: test-cleanup.2
 
 test-start:
+	@echo ""
 	docker run -d --name languagetool -p 8010:8010 $(IMAGENAME):latest
 	sleep 6
 
@@ -41,12 +42,14 @@ test-print-ip-address:
 	@echo "IP address of languagetools docker container: $(TESTIPADDRESS)"
 
 test-run-test-lang:
+	@echo ""
 	curl \
 		-X GET \
 		--header 'Accept: application/json' \
 		'http://$(TESTIPADDRESS):8010/v2/languages'
 
 test-run-test-en:
+	@echo ""
 	curl \
 		-X POST \
 		--header 'Content-Type: application/x-www-form-urlencoded' \
@@ -55,6 +58,7 @@ test-run-test-en:
 		'http://$(TESTIPADDRESS):8010/v2/check'
 
 test-run-test-fr:
+	@echo ""
 	curl -X POST \
 		--header 'Content-Type: application/x-www-form-urlencoded' \
 		--header 'Accept: application/json' \
@@ -63,6 +67,7 @@ test-run-test-fr:
 
 .PHONY: test-cleanup
 test-cleanup.%:
+	@echo ""
 	-docker container stop languagetool
 	-docker container rm languagetool
 
