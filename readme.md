@@ -28,7 +28,6 @@ docker run --name languagetool \
                         --cap-drop=ALL \
                         --user=65534:65534 \
                         --read-only \
-                        --mount type=bind,src=/tmp/languagetool/tmp,dst=/tmp \
                         -p 127.0.0.1:8010:8010 \
                         --memory 412m --memory-swap 500m \
                         -e EXTRAOPTIONS="-Xmx382M" \
