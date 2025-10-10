@@ -7,9 +7,9 @@ ARG UNPACKED_VERSION
 
 LABEL maintainer="Silvio Fricke <silvio.fricke@gmail.com>"
 
-ADD ./LanguageTool-"${UNPACKED_VERSION}" /LanguageTool-"${UNPACKED_VERSION}"
+ADD ./languagetool-"${UNPACKED_VERSION}" /languagetool-"${UNPACKED_VERSION}"
 
-WORKDIR /LanguageTool-"${UNPACKED_VERSION}"
+WORKDIR /languagetool-"${UNPACKED_VERSION}"
 
 COPY misc/start.sh .
 CMD [ "bash", "start.sh" ]
