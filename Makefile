@@ -16,13 +16,13 @@ build: download
 	docker buildx build $(BUILDARG_VERSION) $(BUILDARG_PLATFORM) -t $(IMAGENAME):latest .
 	docker buildx build $(BUILDARG_VERSION) --load -t $(IMAGENAME):latest .
 
-download: LanguageTool-$(VERSION).zip
+download: languagetool-$(VERSION).zip
 	-rm -rf LanguageTool-$(VERSION) LanguageTool-$(UNPACKED_VERSION)
-	echo ":: unzipping LanguageTool-$(VERSION).zip"
-	unzip -o LanguageTool-$(VERSION).zip 2>&1 1>/dev/null
+	echo ":: unzipping languagetool-$(VERSION).zip"
+	unzip -o languagetool-$(VERSION).zip 2>&1 1>/dev/null
 
-LanguageTool-$(VERSION).zip:
-	curl -L https://www.languagetool.org/download/LanguageTool-$(VERSION).zip -o LanguageTool-$(VERSION).zip
+languagetool-$(VERSION).zip:
+	curl -L https://github.com/languagetool-org/languagetool/archive/refs/tags/v$(VERSION).zip -o languagetool-$(VERSION).zip
 
 test: test-cleanup.1
 test: test-start
