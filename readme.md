@@ -57,3 +57,9 @@ Download English ngrams with the commands:
 One can use them using web browser plugin "Local server (localhost)" setting by running:
 
     docker run -d --name languagetool -p 127.0.0.1:8081:8010 -v `pwd`/ngrams:/ngrams:ro --restart=unless-stopped silviof/docker-languagetool
+
+## Easypanel
+
+[Easypanel](https://easypanel.io) is a self-hosted Docker deployment platform, and it maintains a one-click deployment template for this image:
+
+[![Deploy on Easypanel](https://easypanel.io/img/deploy-on-easypanel-40.svg)](https://easypanel.io/templates/languagetool)
