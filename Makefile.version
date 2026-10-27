@@ -1,6 +1,6 @@
 # SPDX-License-Identifier: LGPL-3.0-or-later
-VERSION := 6.7
-SHA256 := 24d1647c304adf274c1532dda7b4f32b4977cc0394585aaf016b27e9c2ad78b8
+VERSION := 6.8
+SHA256 := f04aecf37e35ef17d44b336da9668a5a3a871edd14bd83a766a7e110b9ebcd21
 UNPACKED_VERSION := $(shell echo $(VERSION) | sed -e 's/\([0-9]\+\.[0-9]\+\)\(.*\)/\1/')
 BUILDARG_VERSION := --build-arg VERSION=$(VERSION) --build-arg UNPACKED_VERSION=$(UNPACKED_VERSION)
 IMAGENAME := docker.io/silviof/docker-languagetool
