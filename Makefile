@@ -10,7 +10,7 @@ envout:
 	@echo "BUILDARG_PLATFORM=$(BUILDARG_PLATFORM)"
 
 prepare:
-	sudo apt-get -qq -y install curl
+	sudo apt-get -qq -y install curl jq
 
 build: download
 	docker buildx build $(BUILDARG_VERSION) $(BUILDARG_PLATFORM) -t $(IMAGENAME):latest .
@@ -24,52 +24,9 @@ download: languagetool-$(VERSION).zip
 languagetool-$(VERSION).zip:
 	curl -L https://github.com/languagetool-org/languagetool/archive/refs/tags/v$(VERSION).zip -o languagetool-$(VERSION).zip
 
-test: test-cleanup.1
-test: test-start
-test: TESTIPADDRESS=$(subst ",,$(shell docker inspect languagetool | jq '.[0].NetworkSettings.IPAddress'))
-test: test-print-ip-address
-test: test-run-test-lang
-test: test-run-test-en
-test: test-run-test-fr
-test: test-cleanup.2
-
-test-start:
-	@echo ""
-	docker run -d --name languagetool -p 8010:8010 $(IMAGENAME):latest
-	sleep 6
-
-test-print-ip-address:
-	@echo "IP address of languagetools docker container: $(TESTIPADDRESS)"
-
-test-run-test-lang:
-	@echo ""
-	curl \
-		-X GET \
-		--header 'Accept: application/json' \
-		'http://$(TESTIPADDRESS):8010/v2/languages'
-
-test-run-test-en:
-	@echo ""
-	curl \
-		-X POST \
-		--header 'Content-Type: application/x-www-form-urlencoded' \
-		--header 'Accept: application/json' \
-		-d 'text=hello%20woorld&language=en-US&motherTongue=de-DE&enabledOnly=false' \
-		'http://$(TESTIPADDRESS):8010/v2/check'
-
-test-run-test-fr:
-	@echo ""
-	curl -X POST \
-		--header 'Content-Type: application/x-www-form-urlencoded' \
-		--header 'Accept: application/json' \
-		-d 'text=hello%20woorld&language=fr&motherTongue=de-DE&enabledOnly=false' \
-		'http://$(TESTIPADDRESS):8010/v2/check'
-
-.PHONY: test-cleanup
-test-cleanup.%:
-	@echo ""
-	-docker container stop languagetool
-	-docker container rm languagetool
+.PHONY: test
+test:
+	misc/test.sh $(IMAGENAME):latest $(VERSION)
 
 .PHONY: tag
 tag: tag-push
