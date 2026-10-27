@@ -1,1 +1,4 @@
 ngrams
+*.zip
+*.zip.part
+LanguageTool-*/
